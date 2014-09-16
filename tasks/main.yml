@@ -1,0 +1,27 @@
+- apt: pkg={{ item }} state=present update_cache=true
+  with_items: [nginx, python-pip]
+  sudo: yes
+
+# Install our site
+- template: dest="/etc/nginx/sites-available/{{ app_name }}" src=nginx_api.j2 mode=0644
+  sudo: yes
+- file: dest="/etc/nginx/sites-enabled/{{ app_name }}" src="/etc/nginx/sites-available/{{ app_name }}" state=link
+  sudo: yes
+
+# Remove the default site
+- file: path=/etc/nginx/sites-enabled/default state=absent
+  sudo: yes
+
+- command: /etc/init.d/nginx restart
+  sudo: yes
+
+# Ensure that uwsgi is installed
+- command: "{{ app_bin_dir }}/pip install uwsgi==2.0.5.1"
+  sudo: yes
+
+# Do a restart of the supervisor task.
+# This is because ansible will run the dependency EDITD.supervisor_task before
+# this one! It probably won't run properly because some essential steps are in
+# this role, so we restart it.
+- command: "supervisorctl restart {{ app_name }}:*"
+  sudo: yes

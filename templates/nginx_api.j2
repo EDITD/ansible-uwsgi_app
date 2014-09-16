@@ -1,0 +1,7 @@
+server {
+    charset     utf-8;
+    location / {
+        include uwsgi_params;
+        uwsgi_pass 127.0.0.1:{{ app_port }};
+    }
+}

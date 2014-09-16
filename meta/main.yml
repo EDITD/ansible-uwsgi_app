@@ -1,0 +1,35 @@
+---
+
+galaxy_info:
+  author: EDITD devs
+  description: A role for setting up a uwsgi app (accessed by nginx and controlled by supervisor)
+  company: EDITD
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+    - lucid
+    - maverick
+    - natty
+    - oneiric
+    - precise
+    - quantal
+    - raring
+    - saucy
+    - trusty
+  categories:
+  - development
+  - packaging
+  - system
+  - web
+dependencies:
+  - role: EDITD.supervisor_task
+    name: "{{ app_name }}"
+    command: "{{ app_bin_dir }}/uwsgi --socket 0.0.0.0:{{ app_port }} -w {{ app_callable }} --processes {{ app_num_processes }} --master --die-on-term"
+    directory: "{{ app_directory }}"
+    user: "{{ app_user }}"
+    env_vars: "{{ app_env_vars }}"
+    num_procs: 1
+
