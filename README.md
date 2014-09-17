@@ -13,7 +13,7 @@ To (hopefully!) simplify the app code, this role will simply take a uwsgi app an
 
 ## An example
 
-Image a we have a file `/opt/app/my_app.py` that has a [flask](http://flask.pocoo.org) `app`.
+Imagine a we have a file `/opt/app/my_app.py` that has a [flask](http://flask.pocoo.org) `app`.
 
 I've set this up so that `app_bin_dir` should be your virtualenv bin directory.
 If you aren't using virtualenv, I suppose you could use `/usr/local/bin` (or wherever your `python` and `pip` commands are).
