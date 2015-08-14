@@ -17,7 +17,6 @@
 
 # Ensure that uwsgi is installed
 - command: "{{ app_bin_dir }}/pip install uwsgi==2.0.5.1"
-  sudo: yes
 
 # Do a restart of the supervisor task.
 # This is because ansible will run the dependency EDITD.supervisor_task before
