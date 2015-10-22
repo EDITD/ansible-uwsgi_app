@@ -32,4 +32,3 @@ dependencies:
     user: "{{ app_user }}"
     env_vars: "{{ app_env_vars }}"
     num_procs: 1
-
