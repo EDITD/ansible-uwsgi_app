@@ -28,6 +28,7 @@ If you aren't using virtualenv, I suppose you could use `/usr/local/bin` (or whe
     app_user: user-to-run-as
     app_directory: /opt/app
     app_env_vars: {"PRODUCTION_MODE": "true"}
+    max_body_size: 1024mb  # sets the maximum size of data that can be posted to the nginx server
 ```
 
 
