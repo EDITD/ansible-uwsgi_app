@@ -1,1 +1,2 @@
+uwsgi_version: 2.0.12
 max_body_size: 5m

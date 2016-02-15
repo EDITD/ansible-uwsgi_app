@@ -17,7 +17,7 @@
   sudo: yes
 
 # Ensure that uwsgi is installed
-- command: "{{ app_bin_dir }}/pip install uwsgi==2.0.12"
+- command: "{{ app_bin_dir }}/pip install uwsgi=={{ uwsgi_version }}"
   sudo: yes
   sudo_user: "{{ app_user }}"
 
