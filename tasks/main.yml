@@ -39,12 +39,3 @@
     name="{{ app_name }}:"
     state=started
   sudo: yes
-
-# Optionally, restart the supervisor task group when requested by the user.
-# This does not gracefully restart the uwsgi workers, so not preferable,
-# but it might be needed for certain use cases.
-- supervisorctl:
-    name="{{ app_name }}:"
-    state=restarted
-  sudo: yes
-  when: restart_app
