@@ -1,16 +1,26 @@
 - apt: pkg={{ item }} state=present update_cache=true
-  with_items: [nginx, python-pip]
+  with_items:
+    - nginx
+    - python-pip
   sudo: yes
 
 # Install our site
-- template: dest="/etc/nginx/sites-available/{{ app_name }}" src=nginx_api.j2 mode=0644
+- template:
+    dest=/etc/nginx/sites-available/{{ app_name }}
+    src=nginx_api.j2
+    mode=0644
   sudo: yes
 
-- file: dest="/etc/nginx/sites-enabled/{{ app_name }}" src="/etc/nginx/sites-available/{{ app_name }}" state=link
+- file:
+    dest=/etc/nginx/sites-enabled/{{ app_name }}
+    src=/etc/nginx/sites-available/{{ app_name }}
+    state=link
   sudo: yes
 
 # Remove the default site
-- file: path=/etc/nginx/sites-enabled/default state=absent
+- file:
+    path=/etc/nginx/sites-enabled/default
+    state=absent
   sudo: yes
 
 - command: /etc/init.d/nginx restart
