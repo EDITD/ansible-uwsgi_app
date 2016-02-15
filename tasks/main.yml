@@ -21,9 +21,20 @@
   sudo: yes
   sudo_user: "{{ app_user }}"
 
-# Do a restart of the supervisor task.
-# This is because ansible will run the dependency EDITD.supervisor_task before
-# this one! It probably won't run properly because some essential steps are in
-# this role, so we restart it.
-- command: "supervisorctl restart {{ app_name }}:*"
+# Make sure the supervisor task is indeed started. This is because ansible will
+# run the dependency role EDITD.supervisor_task before this one! It probably
+# won't run properly because some essential steps like installing the uwsgi
+# package are in this role, so we make sure it is started correctly.
+- supervisorctl:
+    name="{{ app_name }}:"
+    state=started
   sudo: yes
+
+# Optionally, restart the supervisor task group when requested by the user.
+# This does not gracefully restart the uwsgi workers, so not preferable,
+# but it might be needed for certain use cases.
+- supervisorctl:
+    name="{{ app_name }}:"
+    state=restarted
+  sudo: yes
+  when: restart_app
