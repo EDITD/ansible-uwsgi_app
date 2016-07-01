@@ -32,3 +32,11 @@ If you aren't using virtualenv, I suppose you could use `/usr/local/bin` (or whe
     restart_app: yes  # optional, ungracefully restarts the app's supervisor task after installing it
     uwsgi_version: 2.0.12  # optional, specify the exact version of uwsgi to be installed
 ```
+
+If needed, `app_uwsgi_params` can be specified to pass extra params to uwsgi.
+
+e.g.
+```yaml
+    app_uwsgi_params: '--close-on-exec'
+```
+    
