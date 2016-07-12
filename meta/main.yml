@@ -33,4 +33,3 @@ dependencies:
     env_vars: "{{ app_env_vars }}"
     num_procs: 1
     restart_task: "{{ restart_app }}"
-    signal_task: HUP
